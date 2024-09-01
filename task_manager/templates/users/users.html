@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">{% trans 'Login' %}</th>
+            <th scope="col">{% trans 'Full name' %}</th>
+            <th scope="col">{% trans 'date of creation' %}</th>
+            <th scope="col">{% trans 'Actions' %}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in all_users %}
+        <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.username }}</td>
+            <td>{{ item.first_name }} {{ item.last_name }}</td>
+            <td>{{ item.date_joined }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

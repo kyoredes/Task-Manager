@@ -47,7 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task_manager',
     'django_bootstrap5',
+    'users',
+    'crispy_forms',
+    "crispy_bootstrap5",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,6 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -125,13 +134,11 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 LANGUAGES = (
-    ('en', _('English')),
+    ('en-us', _('English')),
     ('ru', _('Russian')),
 )
 
@@ -155,3 +162,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+LOGIN_REDIRECT_URL = 'home'
+
+LOGOUT_REDIRECT_URL = 'home'

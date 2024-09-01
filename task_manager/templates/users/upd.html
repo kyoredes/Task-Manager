@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update{% endblock %}
+
+{% block content %}
+{% if messages %}
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+{% endif %}
+
+<div class="container mt-4">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+                
+                {{ field|as_crispy_field }}
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}

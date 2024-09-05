@@ -25,11 +25,16 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'users' %}">{% trans "Users" %}</a>
                     </li>
-                    {% if user.is_authentificated %}
+                    {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link active" herf="">{% trans 'Statuses' %}</a></li>
                         <li class="nav-item"><a class="nav-link active" href="">{% trans 'Tags' %}</a></li>
                         <li class="nav-item"><a class="nav-link active" href="#">{% trans 'Tasks' %}</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">{% trans 'Log Out' %}</a></li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <input class="btn nav-link" type="submit" value="Log Out">
+                            </form>
+                        </li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link active" href="{% url 'login' %}">{% trans 'Log In' %}</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{% url 'create_user' %}">{% trans 'Registration' %}</a></li>
@@ -40,6 +45,14 @@
         </nav>
     </header>
     <main class="container mb-auto">
+        {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show"{% endif %} role="alert">{{ message }}
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                </div>
+                    
+                {% endfor %}
+        {% endif %}
         {% block content %}
         {% endblock %}
     </main>

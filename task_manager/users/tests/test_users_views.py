@@ -7,12 +7,13 @@ class TestResponseCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_users_create_view(self):
-        response = self.client.get('/create_user/')
+        response = self.client.get('/create/')
         self.assertEqual(response.status_code, 200)
 
-    def test_users_create_view(self):
+    def test_users_login_view(self):
         response = self.client.get('/login/')
         self.assertEqual(response.status_code, 200)
-    def test_users_create_view(self):
+
+    def test_users_logout_view(self):
         response = self.client.get('/logout/')
         self.assertEqual(response.status_code, 200)

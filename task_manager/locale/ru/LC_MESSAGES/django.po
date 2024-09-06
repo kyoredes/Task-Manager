@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-25 07:10+0000\n"
+"POT-Creation-Date: 2024-09-06 11:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,75 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: templates/home.html:24
+
+#: task_manager/settings.py:142
+msgid "English"
+msgstr "Английский"
+
+#: task_manager/settings.py:143
+msgid "Russian"
+msgstr "Русский"
+
+#: templates/base.html:23
 msgid "Task Manager"
 msgstr "Менеджер Задач"
 
-#: templates/home.html:27
+#: templates/base.html:26
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/home.html:30
+#: templates/base.html:29
+msgid "Statuses"
+msgstr "Статусы"
+
+#: templates/base.html:30
+msgid "Tags"
+msgstr "Теги"
+
+#: templates/base.html:31
+msgid "Tasks"
+msgstr "Задания"
+
+#: templates/base.html:39
 msgid "Log In"
 msgstr "Вход"
 
-#: templates/home.html:33
+#: templates/base.html:40
 msgid "Registration"
 msgstr "Регистрация"
+
+#: templates/users/users.html:11
+msgid "Login"
+msgstr "Логин"
+
+#: templates/users/users.html:12
+msgid "Full name"
+msgstr "Полное имя"
+
+#: templates/users/users.html:13
+msgid "date of creation"
+msgstr "Дата создания"
+
+#: templates/users/users.html:14
+msgid "Actions"
+msgstr "Действия"
+
+#: templates/users/users.html:26
+msgid "Change"
+msgstr "Изменения"
+
+#: templates/users/users.html:27
+msgid "Delete"
+msgstr "Удалить"
+
+#: users/forms.py:9
+msgid "Your Login"
+msgstr "Ваш Логин"
+
+#: users/forms.py:12
+msgid "Your first name"
+msgstr "Ваше имя"
+
+#: users/forms.py:15
+msgid "Your last name"
+msgstr "Ваша фамилия"

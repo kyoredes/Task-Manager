@@ -4,10 +4,3 @@ from django.utils import translation
 
 def home(request):
     return render(request, 'home.html')
-
-
-
-
-
-# class LoginView(View):
-    

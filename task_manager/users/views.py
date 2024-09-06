@@ -9,6 +9,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from users.forms import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.utils.translation import gettext as translate
 
 
 class UserShowView(View):
@@ -22,7 +23,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = CreateUserForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('home')
-    success_message = "Пользователь успешно зарегистрирован"
+    success_message = translate("User registered successfully")  #"Пользователь успешно зарегистрирован"
+
 
 
 class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
@@ -30,14 +32,14 @@ class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     fields = ['username', 'first_name', 'last_name', 'password']
     template_name = 'users/upd.html'
     success_url = reverse_lazy('home')
-    success_message = "Пользователь успешно изменен"
+    success_message = translate("User successfully changed")  # "Пользователь успешно изменен"
 
 
 class UserDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = User
     success_url = reverse_lazy('home')
     template_name = 'users/del.html'
-    success_message = "Пользователь успешно удален"
+    success_message = translate("User successfully deleted")  # "Пользователь успешно удален"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,7 +50,7 @@ class UserDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'users/log.html'
-    success_message = "Вы залогинены"
+    success_message = translate("You are logged in")  # "Вы залогинены"
     
     def get_success_url(self):
         return reverse_lazy('home')
@@ -57,32 +59,6 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 class CustomLogoutView(SuccessMessageMixin, LogoutView):
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.INFO, 'Successfully logged out.')
+        msg = translate("Successfully logged out")
+        messages.add_message(request, messages.INFO, msg)
         return response
-
-# class UsersLoginView(View):
-#     def get(self, request, *args, **kwargs):
-#         form = UsersLoginForm()
-#         return render(request, 'log.html', context={
-#             'form': form,
-#         })
-#     def post(self, request, *args, **kwargs):
-#         form = UsersLoginForm(request.POST)
-#         if form:
-#             return redirect('home')
-#         return render(request, 'log.html', context={
-#             'form': form
-#         })
-
-# class UsersUpdateView(View):
-#     def get(self, request):
-#         return render(request, 'upd.html')
-#     def post(self, request):
-#         return render(request, 'upd.html')
-
-
-# class UsersDeleteView(View):
-#     def get(self, request):
-#         return render(request, 'del.html')
-#     def post(self, request):
-#         return render(request, 'del.html')

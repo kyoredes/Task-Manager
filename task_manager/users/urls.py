@@ -1,7 +1,6 @@
 from django.urls import path
 from users import views
 from django.contrib.auth.views import LogoutView
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.UserShowView.as_view(), name='users'),

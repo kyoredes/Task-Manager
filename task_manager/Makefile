@@ -14,3 +14,8 @@ sh:
 	poetry run python manage.py shell
 kill:
 	lsof -i :8000 -t | parallel kill
+
+test1:
+	poetry run python manage.py test users .
+test2:
+	poetry run python manage.py test statuses/tests

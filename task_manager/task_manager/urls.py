@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.home, name='home'),
     path("users/", include('users.urls')),
+    path("statuses/", include('statuses.urls')),
 ]
 
 # urlpatterns += i18n_patterns(

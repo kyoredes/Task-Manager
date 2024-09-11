@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
-Home
+    {% trans 'Home' %}
 {% endblock %}
 
 {% block content %}
-<div class="card mt-5">
+<div class="card mt-5 border-0">
     <div class="card-body text-center">
-        <h1>Task manager</h1>
-        <p class="lead">set tasks, assign performers and change their statuses</p>
+        <h1>{% trans 'Task manager' %}</h1>
+        <p class="lead">{% trans 'set tasks, assign performers and change their statuses' %}</p>
         <!-- <p class="lead"> -->
         <!-- <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a> -->
         <!-- </p> -->

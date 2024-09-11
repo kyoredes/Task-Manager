@@ -17,11 +17,3 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name']
-
-# class UsersLoginForm(forms.Form):
-#     login = forms.CharField(
-#         label = gettext("Login")
-#     )
-#     psswd = forms.CharField(
-#         label = gettext("Password")
-#     )

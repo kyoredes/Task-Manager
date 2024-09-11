@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}Users{% endblock %}
+
+{% block title %}
+    {% trans 'Users' %}
+{% endblock %}
 
 {% block content %}
 <div class="container wrapper flex-grow-1">

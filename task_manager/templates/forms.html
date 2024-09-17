@@ -6,6 +6,9 @@
     {{ title }}
 {% endblock %}
 
+{% block main_text %}
+    {{ title }}
+{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
@@ -13,14 +16,16 @@
 
         {% csrf_token %}
 
-        {% if status_to_delete %}
-            <h2>{% trans 'You are going to delete status' %} {{ status_to_delete.title }}</h2>
+        {% if value_to_delete %}
+            <h2>{% trans 'You are going to delete'%} {{ name }} {{ value_to_delete }}</h2>
         {% endif %}
 
-        {% if user_to_delete %}
+        <!-- {% if user_to_delete %}
             <h2>{% trans 'You are going to delete user' %} {{ user_to_delete.username }}</h2>
-        {% endif %}
+        {% endif %} -->
 
+
+        
         {% for field in form %}
             <div class="fieldWrapper">
 
@@ -32,7 +37,10 @@
             </div>
         {% endfor %}
 
-        <input type="submit" value="{{ value }}">
+        
+        <div class="container wrapper flex-grow-1 d-flex mb-3 justify-content-center align-items-center">
+            <input role="button" class="btn btn-primary mx-4" type="submit" value="{{ button }}">
+        </div>
     </form>
 </div>
 {% endblock %}

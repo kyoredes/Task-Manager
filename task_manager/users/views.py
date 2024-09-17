@@ -15,8 +15,32 @@ from utils.utils_classes import CustomLoginRequiredMixin
 class UserShowView(View):
     def get(self, request):
         all_users = User.objects.all()
-        return render(request, 'users/users.html', context={
-            'all_users': all_users})
+        info = []
+        for item in all_users:
+            full_name = item.first_name + item.last_name
+            info.append(
+                (
+                    item.id,
+                    item.username,
+                    full_name,
+                    item.date_joined,
+                )
+            )
+        
+        tables = [
+            translate('ID'),
+            translate('Username'),
+            translate('Full name'),
+            translate('Created at'),
+        ]
+        
+        return render(request, 'table.html', context={
+            'info': info,
+            'title': translate('Users'),
+            'tables': tables,
+            'url_name_change': 'update_user',
+            'url_name_delete': 'delete_user',
+        })
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
@@ -26,7 +50,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = translate("User registered successfully")  # "Пользователь успешно зарегистрирован"
     extra_context = {
         'title': translate('Create User'),
-        'value': translate('Create'),
+        'button': translate('Create'),
     }
 
 
@@ -38,7 +62,7 @@ class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = translate("User successfully changed")  # "Пользователь успешно изменен"
     extra_context = {
         'title': translate('Update user'),
-        'value': translate('Update'),
+        'button': translate('Update'),
     }
 
 
@@ -50,8 +74,10 @@ class UserDeleteView(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_to_delete'] = context['object']
-        context['value'] = translate('delete')
+        context['title'] = translate('Delete user')
+        context['value_to_delete'] = context['object']
+        context['name'] = translate('user')
+        context['button'] = translate('Delete')
         return context
 
 
@@ -61,7 +87,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     success_message = translate("You are logged in")  # "Вы залогинены"
     extra_context = {
         'title': translate('Log In'),
-        'value': translate('Log In'),
+        'button': translate('Log In'),
     }
     def get_success_url(self):
         return reverse_lazy('home')

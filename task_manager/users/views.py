@@ -10,6 +10,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext as translate
 from utils.utils_classes import CustomLoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 
 
 class UserShowView(View):
@@ -54,7 +56,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(UserPassesTestMixin, CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     fields = ['username', 'first_name', 'last_name', 'password']
     template_name = 'forms.html'
@@ -64,13 +66,22 @@ class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
         'title': translate('Update user'),
         'button': translate('Update'),
     }
+    def test_func(self, **kwargs):
+        return self.request.user.id == self.kwargs.get('pk')
+    
+    def handle_no_permission(self):
+        text_error = translate("You are not allowed to edit this user")
+        messages.error(self.request, text_error)
+        return redirect(reverse_lazy('users'))
 
 
-class UserDeleteView(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
+
+class UserDeleteView(UserPassesTestMixin, CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = User
     success_url = reverse_lazy('home')
     template_name = 'forms.html'
     success_message = translate("User successfully deleted")  # "Пользователь успешно удален"
+            
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -79,7 +90,13 @@ class UserDeleteView(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
         context['name'] = translate('user')
         context['button'] = translate('Delete')
         return context
-
+    def test_func(self, **kwargs):
+        return self.request.user.id == self.kwargs.get('pk')
+    
+    def handle_no_permission(self):
+        text_error = translate("You are not allowed to delete this user")
+        messages.error(self.request, text_error)
+        return redirect(reverse_lazy('users'))
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm

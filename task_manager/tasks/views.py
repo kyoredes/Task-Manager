@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Task
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as translate
@@ -7,6 +7,9 @@ from utils.utils_classes import CustomLoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
 from tasks.forms import TaskCreateForm
 from tasks.models import Task
+from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 # Create your views here.
 def tasks(request):
     all_tasks = Task.objects.all()
@@ -69,7 +72,7 @@ class TaskUpdateView(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView):
     }
 
 
-class TaskDeleteView(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
+class TaskDeleteView(UserPassesTestMixin, SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
     model = Task
     success_message = translate('Task deleted successfully')
     success_url = reverse_lazy('home')
@@ -82,4 +85,11 @@ class TaskDeleteView(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
         context['name'] = translate('task')
         context['button'] = translate('delete')
         return context
+    
+    def test_func(self, **kwargs):
+        return self.request.user.id == self.model.objects.all().get(id=self.kwargs.get('pk')).author_id
 
+    def handle_no_permission(self):
+        text_error = translate("You are not allowed to delete this task")
+        messages.error(self.request, text_error)
+        return redirect(reverse_lazy('tasks'))

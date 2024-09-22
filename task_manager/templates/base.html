@@ -27,7 +27,7 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link active" href="{% url 'statuses' %}">{% trans 'Statuses' %}</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="#">{% trans 'Tags' %}</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'labels' %}">{% trans 'Labels' %}</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{% url 'tasks' %}">{% trans 'Tasks' %}</a></li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}">

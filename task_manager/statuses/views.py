@@ -73,7 +73,6 @@ class StatusDeleteView(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView
         success_url = self.get_success_url()
         try:
             self.object.delete()
-            return H
             messages.success(request, success_message)
             return HttpResponseRedirect(success_url)
         except ProtectedError:

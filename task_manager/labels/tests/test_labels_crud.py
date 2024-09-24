@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from statuses.models import Status
+from labels.models import Label
 from django.contrib.auth import get_user_model
 # Create your tests here.
 class TestStatusesCase(TestCase):
@@ -21,36 +21,32 @@ class TestStatusesCase(TestCase):
                 'password': '6754556876a',
             }
         )
-    
-    def get_id(self, title):
-        user = Status.objects.all().get(title=title)
-        return user.id
-
-    def test_create_status(self):
+        
+    def test_create_label(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_label'), {'name': 'title'}
         )
-        status_exists = Status.objects.filter(title='name').exists()
-        self.assertTrue(status_exists)
+        exists = Label.objects.all().filter(name='title').exists()
+        self.assertTrue(exists)
     
     def test_update_status(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_label'), {'name': 'title'}
         )
-        id = self.get_id('name')
+        id = Label.objects.all().get(name='title').id
         self.client.post(
-            reverse('update_status', kwargs={'pk': id}), {'title': 'new_name'}
+            reverse('update_label', kwargs={'pk': id}), {'name': 'titlee'}
         )
-        status_exists = Status.objects.all().filter(title='new_name').exists()
-        self.assertTrue(status_exists)
+        exists = Label.objects.all().filter(name='titlee').exists()
+        self.assertTrue(exists)
     
     def test_delete_status(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_label'), {'name': 'title'}
         )
-        id = self.get_id('name')
+        id = Label.objects.all().get(name='title').id
         self.client.post(
-            reverse('delete_status', kwargs={'pk': id})
+            reverse('delete_label', kwargs={'pk': id})
         )
-        status_exists = Status.objects.all().filter(title='name').exists()
-        self.assertFalse(status_exists)
+        res = Label.objects.all().filter(id=id)
+        self.assertEqual(len(res), 0)

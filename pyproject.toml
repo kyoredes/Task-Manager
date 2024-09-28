@@ -17,6 +17,7 @@ django-modeltranslation = "^0.19.7"
 flake8 = "^7.1.1"
 django-crispy-forms = "^2.3"
 crispy-bootstrap5 = "^2024.2"
+django-filter = "^24.3"
 
 
 [build-system]

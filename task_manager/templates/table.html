@@ -18,6 +18,24 @@
         <a class="btn btn-primary mx-4" href="{{ button_url }}" role="button">{{ button_value }}</a>
     </div>
     {% endif %}
+    
+{% if task_filter %}
+    <form method="get">
+        {{ task_filter.form.as_p }}
+        <button type="submit">Поиск</button>
+    </form>
+    <ul>
+    {% for item in task_filter.qs %}
+        <li>{{ item.title }}</li>
+    {% empty %}
+        <li>Задачи не найдены.</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    
+
+    {{ info }}
+
     <table class="table">
         <thead>
             <tr>
@@ -29,20 +47,15 @@
     
         <tbody>
             {% for item in info %}
+            
             <tr>
-                <!-- <td>{{ item.id }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.status }}</td>
-                <td>{{ item.author }}</td>
-                <td>{{ item.executor }}</td>
-                <td>{{ item.created_at }}</td> -->
-                {% for i in item %}
-                    <td>{{ i }}</td>
+                {% for k, v in item.items %}
+                    <td>{{ v }}</td>
                 {% endfor %}
                 
                 <td>
-                    <a href="{% url url_name_change pk=item.0 %}">{% trans 'Change' %}</a>
-                    <a href="{% url url_name_delete pk=item.0 %}">{% trans 'Delete' %}</a>
+                    <a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a>
+                    <a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}

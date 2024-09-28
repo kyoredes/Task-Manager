@@ -19,12 +19,6 @@
         {% if value_to_delete %}
             <h2>{% trans 'You are going to delete'%} {{ name }} {{ value_to_delete }}</h2>
         {% endif %}
-
-        <!-- {% if user_to_delete %}
-            <h2>{% trans 'You are going to delete user' %} {{ user_to_delete.username }}</h2>
-        {% endif %} -->
-
-
         
         {% for field in form %}
             <div class="fieldWrapper">

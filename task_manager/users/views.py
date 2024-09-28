@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
@@ -10,39 +10,37 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext as translate
 from utils.utils_classes import CustomLoginRequiredMixin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.db.models.functions import Concat
+from django.db.models import Value
 
+class UserListView(ListView):
+    model = get_user_model()
+    template_name = 'table.html'
+    context_object_name = 'info'
+    paginate_by = 20
+    tables = [
+        translate('ID'),
+        translate('Useraname'),
+        translate('Full name'),
+        translate('Created at'),
+    ]
+    extra_context = {
+        'title': 'Users',
+        'tables': tables,
+        'url_name_change': 'update_user',
+        'url_name_delete': 'delete_user',
+        'button_value': translate('Create user'),
+        'button_url': reverse_lazy('create_user'),
+    }
 
-
-class UserShowView(View):
-    def get(self, request):
-        all_users = User.objects.all()
-        info = []
-        for item in all_users:
-            full_name = item.first_name + item.last_name
-            info.append(
-                (
-                    item.id,
-                    item.username,
-                    full_name,
-                    item.date_joined,
-                )
+    def get_queryset(self):
+        return self.model.objects.annotate(
+            full_name=Concat(
+                'first_name', Value(' '), 'last_name'
             )
-        
-        tables = [
-            translate('ID'),
-            translate('Username'),
-            translate('Full name'),
-            translate('Created at'),
-        ]
-        
-        return render(request, 'table.html', context={
-            'info': info,
-            'title': translate('Users'),
-            'tables': tables,
-            'url_name_change': 'update_user',
-            'url_name_delete': 'delete_user',
-        })
+        ).values('id', 'username', 'full_name', 'date_joined')
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
@@ -58,7 +56,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 class UserUpdateView(UserPassesTestMixin, CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    fields = ['username', 'first_name', 'last_name', 'password']
+    form_class = CreateUserForm
+    # fields = ['username', 'first_name', 'last_name', 'password']
     template_name = 'forms.html'
     success_url = reverse_lazy('home')
     success_message = translate("User successfully changed")  # "Пользователь успешно изменен"
@@ -98,16 +97,22 @@ class UserDeleteView(UserPassesTestMixin, CustomLoginRequiredMixin, SuccessMessa
         messages.error(self.request, text_error)
         return redirect(reverse_lazy('users'))
 
+
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'forms.html'
     success_message = translate("You are logged in")  # "Вы залогинены"
+    error_message = translate("Please check if your login or password is correct")
     extra_context = {
         'title': translate('Log In'),
         'button': translate('Log In'),
     }
     def get_success_url(self):
         return reverse_lazy('home')
+    
+    def form_invalid(self, form):
+        messages.error(self.request, self.error_message)
+        return super().form_invalid(form)
 
 
 class CustomLogoutView(SuccessMessageMixin, LogoutView):

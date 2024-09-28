@@ -4,27 +4,21 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as translate
 from django.contrib.messages.views import SuccessMessageMixin
 from utils.utils_classes import CustomLoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from tasks.forms import TaskCreateForm
 from tasks.models import Task
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
+from tasks.filters import TaskFilter
+from django_filters.views import FilterView
+
 
 # Create your views here.
-def tasks(request):
-    all_tasks = Task.objects.all()
-    info = []
-    for item in all_tasks:
-        info.append(
-            [
-                item.id,
-                item.title,
-                item.status,
-                item.author,
-                item.executor,
-                item.created_at
-            ]
-        )
+class TaskListView(ListView):
+    model = Task
+    template_name = 'table.html'
+    context_object_name = 'info'
+    paginate_by = 20
     tables = [
         translate('ID'),
         translate('Name'),
@@ -34,15 +28,25 @@ def tasks(request):
         translate('Created at'),
         translate('Action'),
     ]
-    return render(request, 'table.html', context={
-        'info': info,
-        'title': 'Tasks',
+    extra_context = {
+        'title': 'Task',
         'tables': tables,
         'url_name_change': 'update_task',
         'url_name_delete': 'delete_task',
         'button_value': translate('Create task'),
-        'button_url': reverse_lazy('create_task')
-    })
+        'button_url': reverse_lazy('create_task'),
+    }
+
+    def get_queryset(self):
+        return Task.objects.select_related('author', 'status').values(
+            'id',
+            'title',
+            'status__title',
+            'author__username',
+            'executor__username',
+            'created_at',
+        )
+
 
 
 class TaskCreateView(SuccessMessageMixin, CustomLoginRequiredMixin, CreateView):
@@ -93,3 +97,10 @@ class TaskDeleteView(UserPassesTestMixin, SuccessMessageMixin, CustomLoginRequir
         text_error = translate("You are not allowed to delete this task")
         messages.error(self.request, text_error)
         return redirect(reverse_lazy('tasks'))
+
+
+# class TaskFilterView(FilterView):
+#     model = Task
+#     template_name = 'table.html'
+#     filterset_class = TaskFilter
+#     context_object_name = 'task_filter'

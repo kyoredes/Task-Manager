@@ -1,6 +1,7 @@
 # created by virtualenv automatically
 .env
 **/__pycache__/
+*.pyc
 dist/
 .venv/
 .coverage

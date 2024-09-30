@@ -19,6 +19,7 @@ django-crispy-forms = "^2.3"
 crispy-bootstrap5 = "^2024.2"
 django-filter = "^24.3"
 rollbar = "^1.0.0"
+coverage = "^7.6.1"
 
 
 [build-system]

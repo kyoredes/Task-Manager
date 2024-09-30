@@ -9,6 +9,12 @@ lint:
 	poetry run flake8
 check:
 	poetry check
+build:
+	poetry build
+test:
+	cd task_manager/ && poetry run coverage run manage.py test	
+test-coverage:
+	poetry run coverage report
 shell:
 	poetry run python task_manager/manage.py shell
 test-users:
@@ -18,9 +24,4 @@ test-statuses:
 test-tasks:
 	poetry run python task_manager/manage.py test task_manager/tasks/tests
 test-labels:
-	poetry run python task_manager/manage.py test task_manager/labels/tests
-test-all:
-	poetry run python task_manager/manage.py test task_manager/tasks/tests
-	poetry run python task_manager/manage.py test task_manager/statuses/tests
-	poetry run python task_manager/manage.py test task_manager/users/tests
 	poetry run python task_manager/manage.py test task_manager/labels/tests

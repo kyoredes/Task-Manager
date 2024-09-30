@@ -15,26 +15,18 @@
 <div class="container wrapper flex-grow-1">
     {% if button_value %}
     <div class="container wrapper flex-grow-1 d-flex mb-3 justify-content-start align-items-center">
-        <a class="btn btn-primary mx-4" href="{{ button_url }}" role="button">{{ button_value }}</a>
+        <a class="btn btn-primary" href="{{ button_url }}" role="button">{{ button_value }}</a>
     </div>
     {% endif %}
     
 {% if task_filter %}
-    <form method="get">
-        {{ task_filter.form.as_p }}
-        <button type="submit">Поиск</button>
-    </form>
-    <ul>
-    {% for item in task_filter.qs %}
-        <li>{{ item.title }}</li>
-    {% empty %}
-        <li>Задачи не найдены.</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-    
+    <form method="get" class="form-inline">
+        {{ task_filter.form|crispy }}
+        <input role="button" class="btn btn-primary mx-4" type="submit" value="{% trans 'Search' %}">
 
-    {{ info }}
+    </form>
+
+{% endif %}
 
     <table class="table">
         <thead>

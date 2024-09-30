@@ -30,6 +30,9 @@ jobs:
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_URL: ${{ secrets.DB_URL }}
+          ROLLBAR_TOKEN: ${{ secrets.ROLLBAR_TOKEN }}
         with:
           coverageCommand: make test-coverage
           debug: true

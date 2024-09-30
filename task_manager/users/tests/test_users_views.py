@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-# Create your tests here.
+
+
 class TestResponseCase(TestCase):
     def setUp(self):
         users_data = {
@@ -11,14 +12,14 @@ class TestResponseCase(TestCase):
             'password1': '6754556876a',
             'password2': '6754556876a',
         }
-        response =  self.client.post(
+        self.client.post(
             reverse('create_user'), users_data
         )
-        
+
     def get_id(self, username):
         user = get_user_model().objects.all().get(username=username)
         return user.id
-    
+
     def test_users_show_view(self):
         response = self.client.get('/users/')
         self.assertEqual(response.status_code, 200)
@@ -36,7 +37,7 @@ class TestResponseCase(TestCase):
         id = self.get_id(username='kaito')
         response = self.client.get(f'/users/{id}/delete/')
         self.assertEqual(response.status_code, 302)
-    
+
     def test_users_login_view(self):
         response = self.client.get('/users/login/')
         self.assertEqual(response.status_code, 200)

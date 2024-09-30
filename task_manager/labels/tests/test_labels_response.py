@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from labels.models import Label
-from django.contrib.auth import get_user_model
+
 
 class TestTaskResponseCase(TestCase):
     def setUp(self):
@@ -12,7 +12,7 @@ class TestTaskResponseCase(TestCase):
             'password1': '6754556876a',
             'password2': '6754556876a',
         }
-        response =  self.client.post(
+        self.client.post(
             reverse('create_user'), users_data
         )
         self.client.post(
@@ -21,6 +21,7 @@ class TestTaskResponseCase(TestCase):
         self.client.post(
             reverse('create_label'), name='title'
         )
+
     def test_labels_show_view(self):
         response = self.client.get('/labels/')
         self.assertEqual(response.status_code, 200)

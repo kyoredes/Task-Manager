@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from labels.models import Label
-from django.contrib.auth import get_user_model
-# Create your tests here.
+
+
 class TestStatusesCase(TestCase):
     def setUp(self):
         users_data = {
@@ -12,7 +12,7 @@ class TestStatusesCase(TestCase):
             'password1': '6754556876a',
             'password2': '6754556876a',
         }
-        response =  self.client.post(
+        self.client.post(
             reverse('create_user'), users_data
         )
         self.client.post(
@@ -21,14 +21,14 @@ class TestStatusesCase(TestCase):
                 'password': '6754556876a',
             }
         )
-        
+
     def test_create_label(self):
         self.client.post(
             reverse('create_label'), {'name': 'title'}
         )
         exists = Label.objects.all().filter(name='title').exists()
         self.assertTrue(exists)
-    
+
     def test_update_status(self):
         self.client.post(
             reverse('create_label'), {'name': 'title'}
@@ -39,7 +39,7 @@ class TestStatusesCase(TestCase):
         )
         exists = Label.objects.all().filter(name='titlee').exists()
         self.assertTrue(exists)
-    
+
     def test_delete_status(self):
         self.client.post(
             reverse('create_label'), {'name': 'title'}

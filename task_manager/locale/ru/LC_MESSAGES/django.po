@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-06 11:14+0300\n"
+"POT-Creation-Date: 2024-09-30 13:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/settings.py:142
+#: task_manager/settings.py:144
 msgid "English"
 msgstr "Английский"
 
-#: task_manager/settings.py:143
+#: task_manager/settings.py:145
 msgid "Russian"
 msgstr "Русский"
 
@@ -41,8 +41,8 @@ msgid "Statuses"
 msgstr "Статусы"
 
 #: templates/base.html:30
-msgid "Tags"
-msgstr "Теги"
+msgid "Labels"
+msgstr "Метки"
 
 #: templates/base.html:31
 msgid "Tasks"
@@ -56,38 +56,59 @@ msgstr "Вход"
 msgid "Registration"
 msgstr "Регистрация"
 
-#: templates/users/users.html:11
-msgid "Login"
-msgstr "Логин"
+#: templates/forms.html:20
+msgid "You are going to delete"
+msgstr "Вы собираетесь удалить"
 
-#: templates/users/users.html:12
-msgid "Full name"
-msgstr "Полное имя"
+#: templates/home.html:5
+msgid "Home"
+msgstr "Главная страница"
 
-#: templates/users/users.html:13
-msgid "date of creation"
-msgstr "Дата создания"
+#: templates/home.html:12
+#, fuzzy
+#| msgid "Task Manager"
+msgid "Task manager"
+msgstr "Менеджер Задач"
 
-#: templates/users/users.html:14
-msgid "Actions"
-msgstr "Действия"
+#: templates/home.html:13
+msgid "set tasks, assign performers and change their statuses"
+msgstr "Создавайте задачи, назначайте исполнителей и меняйте их статусы"
 
-#: templates/users/users.html:26
+#: templates/table.html:25
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/table.html:49
 msgid "Change"
 msgstr "Изменения"
 
-#: templates/users/users.html:27
+#: templates/table.html:50
 msgid "Delete"
 msgstr "Удалить"
 
-#: users/forms.py:9
+#: users/forms.py:10
 msgid "Your Login"
 msgstr "Ваш Логин"
 
-#: users/forms.py:12
+#: users/forms.py:13
 msgid "Your first name"
 msgstr "Ваше имя"
 
-#: users/forms.py:15
+#: users/forms.py:16
 msgid "Your last name"
 msgstr "Ваша фамилия"
+
+#~ msgid "Tags"
+#~ msgstr "Теги"
+
+#~ msgid "Login"
+#~ msgstr "Логин"
+
+#~ msgid "Full name"
+#~ msgstr "Полное имя"
+
+#~ msgid "date of creation"
+#~ msgstr "Дата создания"
+
+#~ msgid "Actions"
+#~ msgstr "Действия"

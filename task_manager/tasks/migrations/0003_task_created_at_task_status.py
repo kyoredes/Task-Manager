@@ -9,20 +9,30 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('statuses', '0003_rename_name_status_title'),
-        ('tasks', '0002_rename_name_task_title_remove_task_created_at_and_more'),
+        (
+            'tasks',
+            '0002_rename_name_task_title_remove_task_created_at_and_more'
+        ),
     ]
 
     operations = [
         migrations.AddField(
             model_name='task',
             name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='task',
             name='status',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='statuses.status'),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to='statuses.status'
+            ),
             preserve_default=False,
         ),
     ]

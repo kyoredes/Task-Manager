@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-from tasks.models import Task
 from statuses.models import Status
 from labels.models import Label
 from django.contrib.auth import get_user_model
@@ -15,7 +14,7 @@ class TestTaskCase(TestCase):
             'password1': '6754556876a',
             'password2': '6754556876a',
         }
-        response =  self.client.post(
+        self.client.post(
             reverse('create_user'), users_data
         )
         self.client.post(
@@ -26,14 +25,27 @@ class TestTaskCase(TestCase):
         status = Status.objects.create(title='title')
         label = Label.objects.create(name='name')
         user = get_user_model().objects.all().get(username='kaito')
-        self.client.post(reverse('create_task'), {'title': 'title', 'description': 'sjhfkshk', 'status': status.id, 'executor': user.id})
+        self.client.post(
+            reverse('create_task'),
+            {
+                'title': 'title',
+                'description': 'sjhfkshk',
+                'status': status.id,
+                'executor': user.id
+            }
+        )
         # status filter
-        response = self.client.get(f'/tasks/?status={status.id}&executor=&label=')
+        response = self.client.get(
+            f'/tasks/?status={status.id}&executor=&label='
+        )
         self.assertEqual(response.status_code, 200)
         # executor filter
-        response = self.client.get(f'/tasks/?status=&executor={user.id}&label=')
+        response = self.client.get(
+            f'/tasks/?status=&executor={user.id}&label='
+        )
         self.assertEqual(response.status_code, 200)
         # label filter
-        response = self.client.get(f'/tasks/?status=&executor=&label={label.id}')
+        response = self.client.get(
+            f'/tasks/?status=&executor=&label={label.id}'
+        )
         self.assertEqual(response.status_code, 200)
-        

@@ -17,8 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from task_manager import views
-from django.conf.urls.i18n import i18n_patterns
-from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -29,7 +27,3 @@ urlpatterns = [
     path("tasks/", include("tasks.urls")),
     path('labels/', include("labels.urls")),
 ]
-
-# urlpatterns += i18n_patterns(
-    # path("", views.home),
-# )

@@ -15,13 +15,14 @@ sh:
 kill:
 	lsof -i :8000 -t | xargs -P 2 kill
 
-test1:
+test-users:
 	poetry run python manage.py test users .
-test2:
+test-statuses:
 	poetry run python manage.py test statuses/tests
-test3:
+test-tasks:
 	poetry run python manage.py test tasks/tests
-
+test-labels:
+	poetry run python manage.py test labels/tests
 test-all:
 	poetry run python manage.py test tasks/tests
 	poetry run python manage.py test statuses/tests

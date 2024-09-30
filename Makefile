@@ -12,8 +12,9 @@ check:
 build:
 	poetry build
 test:
-	cd task_manager/ && poetry run coverage run manage.py test	
+	cd task_manager/ && poetry run coverage run manage.py test
 test-coverage:
+	cd task_manager/ && poetry run coverage run manage.py test
 	poetry run coverage report
 shell:
 	poetry run python task_manager/manage.py shell

@@ -246,13 +246,13 @@ typing_extensions = ">=3.10.0.0"
 
 [[package]]
 name = "django"
-version = "5.1"
+version = "5.1.1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.1-py3-none-any.whl", hash = "sha256:d3b811bf5371a26def053d7ee42a9df1267ef7622323fe70a601936725aa4557"},
-    {file = "Django-5.1.tar.gz", hash = "sha256:848a5980e8efb76eea70872fb0e4bc5e371619c70fffbe48e3e1b50b2c09455d"},
+    {file = "Django-5.1.1-py3-none-any.whl", hash = "sha256:71603f27dac22a6533fb38d83072eea9ddb4017fead6f67f2562a40402d61c3f"},
+    {file = "Django-5.1.1.tar.gz", hash = "sha256:021ffb7fdab3d2d388bc8c7c2434eb9c1f6f4d09e6119010bbb1694dda286bc2"},
 ]
 
 [package.dependencies]
@@ -266,17 +266,20 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-bootstrap5"
-version = "24.2"
+version = "24.3"
 description = "Bootstrap 5 for Django"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_bootstrap5-24.2-py3-none-any.whl", hash = "sha256:6a5d83e9ff1952f7c07c54cebcb76c85f09787b8b57eeb4ec07554cd583acc64"},
-    {file = "django_bootstrap5-24.2.tar.gz", hash = "sha256:a3cee2b3d45745210c5b898af2917f310f44df746269fe09a93be28a0adc2a4b"},
+    {file = "django_bootstrap5-24.3-py3-none-any.whl", hash = "sha256:98f7916f9f7f9c34dfe157f7c062a28ebf6d17ff95307bef260ba794ba34e2a0"},
+    {file = "django_bootstrap5-24.3.tar.gz", hash = "sha256:ca5ec5568fc2a3fc239f0cb8ce41a7df3802b8c4af930d7f64451784ec7ddc16"},
 ]
 
 [package.dependencies]
 Django = ">=4.2"
+
+[package.extras]
+jinja = ["Jinja2 (>=3.0,<4)"]
 
 [[package]]
 name = "django-crispy-forms"
@@ -322,13 +325,13 @@ pyyaml = "*"
 
 [[package]]
 name = "django-modeltranslation"
-version = "0.19.7"
+version = "0.19.9"
 description = "Translates Django models using a registration approach."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_modeltranslation-0.19.7-py3-none-any.whl", hash = "sha256:2ea4cbbe16ef7d3bd5e11e092092f8c8b80f6b2953e4e1accadeda6a52779b3a"},
-    {file = "django_modeltranslation-0.19.7.tar.gz", hash = "sha256:f7d56a406f2a8fbea606bb6040b4e5e86939291aba692af2ff6b60ae00bb96fd"},
+    {file = "django_modeltranslation-0.19.9-py3-none-any.whl", hash = "sha256:3474e61488201b7babdc575c1774f653574d09e410a8c96c5c6a8a84716f1dd6"},
+    {file = "django_modeltranslation-0.19.9.tar.gz", hash = "sha256:78f1bf32b0fb04e5970b988bd7cd17fe2bdfaae69012048c338af4610a7807db"},
 ]
 
 [package.dependencies]
@@ -578,17 +581,29 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "rollbar"
-version = "1.0.0"
+version = "0.16.3"
 description = "Easy and powerful exception tracking with Rollbar. Send messages and exceptions with arbitrary context, get back aggregates, and debug production issues quickly."
 optional = false
 python-versions = "*"
 files = [
-    {file = "rollbar-1.0.0-py3-none-any.whl", hash = "sha256:b7831cd8f2d2384e5922cdfb18897890c4ac4609fddfd2a821efe17b92cf1e58"},
-    {file = "rollbar-1.0.0.tar.gz", hash = "sha256:6347b7e49f22f0296fc287a6aea75d642cf64494d2ee127042a7a593c97df3af"},
+    {file = "rollbar-0.16.3-py3-none-any.whl", hash = "sha256:f06e23b36d7d1b547f32f287da9367b9bf53319f611da0ec9e891859507ac94e"},
+    {file = "rollbar-0.16.3.tar.gz", hash = "sha256:02313dfc60710ec736ab033d0f8c969d857a8b991cd67e0c1a91620e8a04ede2"},
 ]
 
 [package.dependencies]
-requests = ">=0.12.1"
+requests = {version = ">=0.12.1", markers = "python_version >= \"3.6\""}
+six = ">=1.9.0"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+files = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
 
 [[package]]
 name = "sqlparse"
@@ -618,13 +633,13 @@ files = [
 
 [[package]]
 name = "tzdata"
-version = "2024.1"
+version = "2024.2"
 description = "Provider of IANA time zone data"
 optional = false
 python-versions = ">=2"
 files = [
-    {file = "tzdata-2024.1-py2.py3-none-any.whl", hash = "sha256:9068bc196136463f5245e51efda838afa15aaeca9903f49050dfa2679db4d252"},
-    {file = "tzdata-2024.1.tar.gz", hash = "sha256:2674120f8d891909751c38abcdfd386ac0a5a1127954fbc332af6b5ceae07efd"},
+    {file = "tzdata-2024.2-py2.py3-none-any.whl", hash = "sha256:a48093786cdcde33cad18c2555e8532f34422074448fbc874186f0abd79565cd"},
+    {file = "tzdata-2024.2.tar.gz", hash = "sha256:7d85cc416e9382e69095b7bdf4afd9e3880418a2413feec7069d533d6b4e31cc"},
 ]
 
 [[package]]
@@ -647,4 +662,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "55a55f00966d860c7a33fc1e9a476abeb119c2354713c338a07f453536562f82"
+content-hash = "bcffe5c52970aac222fb326294e1843105d09266ccc5ddde842603a83d6b5326"

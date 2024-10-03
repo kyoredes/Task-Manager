@@ -1,14 +1,14 @@
 from django.shortcuts import redirect
-from .models import Task
+from task_manager.tasks.models import Task
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as translate
 from django.contrib.messages.views import SuccessMessageMixin
-from utils.utils_classes import CustomLoginRequiredMixin
+from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from tasks.forms import TaskCreateForm
+from task_manager.tasks.forms import TaskCreateForm
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
-from tasks.filters import TaskFilter
+from task_manager.tasks.filters import TaskFilter
 
 
 class TaskListView(ListView):

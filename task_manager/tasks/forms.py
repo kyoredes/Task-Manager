@@ -1,9 +1,9 @@
 from django import forms
 from django.utils.translation import gettext as translate
 from django.contrib.auth import get_user_model
-from tasks.models import Task
-from statuses.models import Status
-from labels.models import Label
+from task_manager.tasks.models import Task
+from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 
 
 class TaskCreateForm(forms.ModelForm):

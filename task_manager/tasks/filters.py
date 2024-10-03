@@ -1,5 +1,5 @@
 import django_filters as filter
-from tasks.models import Task
+from task_manager.tasks.models import Task
 from django.utils.translation import gettext as translate
 from django import forms
 

@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
-from statuses.models import Status
-from statuses.forms import StatusCreateForm
-from utils.utils_classes import CustomLoginRequiredMixin
+from task_manager.statuses.models import Status
+from task_manager.statuses.forms import StatusCreateForm
+from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.utils.translation import gettext as translate
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView

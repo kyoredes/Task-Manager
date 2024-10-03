@@ -1,5 +1,5 @@
 from django import forms
-from labels.models import Label
+from task_manager.labels.models import Label
 
 
 class LabelCreateForm(forms.ModelForm):

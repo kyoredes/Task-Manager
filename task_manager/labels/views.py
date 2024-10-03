@@ -1,9 +1,9 @@
-from labels.models import Label
+from task_manager.labels.models import Label
 from django.utils.translation import gettext as translate
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from labels.forms import LabelCreateForm
-from utils.utils_classes import CustomLoginRequiredMixin
+from task_manager.labels.forms import LabelCreateForm
+from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.deletion import ProtectedError
 from django.contrib import messages

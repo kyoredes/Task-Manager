@@ -4,11 +4,11 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from users.forms import CreateUserForm
+from task_manager.users.forms import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext as translate
-from utils.utils_classes import CustomLoginRequiredMixin
+from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models.functions import Concat

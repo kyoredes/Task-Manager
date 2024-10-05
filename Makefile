@@ -14,8 +14,7 @@ build:
 test:
 	poetry run coverage run manage.py test
 test-coverage:
-	poetry run coverage run manage.py test
-	poetry run coverage report
+	poetry run coverage run --source='.' manage.py test && poetry run coverage xml
 shell:
 	poetry run python manage.py shell
 test-users:

@@ -64,6 +64,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,17 +134,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru'  # Код языка по умолчанию (русский)
 
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ('en-us', _('English')),
-    ('ru', _('Russian')),
+    ('en', _('English')),  # Код для английского
+    ('ru', _('Russian')),  # Код для русского
 )
 
 LOCALE_PATHS = (

@@ -22,36 +22,41 @@
 {% if task_filter %}
     <form method="get" class="form-inline">
         {{ task_filter.form|crispy }}
-        <input role="button" class="btn btn-primary mx-4" type="submit" value="{% trans 'Search' %}">
+        <input role="button" class="btn btn-primary mx-4" type="submit" value="{% trans 'Show' %}">
 
     </form>
 
 {% endif %}
-
-    <table class="table">
-        <thead>
-            <tr>
-                {% for item in tables %}
-                    <th scope="col">{{ item }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-    
-        <tbody>
-            {% for item in info %}
-            
-            <tr>
-                {% for k, v in item.items %}
-                    <td>{{ v }}</td>
-                {% endfor %}
-                
-                <td>
-                    <a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a>
-                    <a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a>
-                </td>
-            </tr>
+<table class="table">
+    <thead>
+        <tr>
+            {% for item in tables %}
+                <th scope="col">{{ item }}</th>
             {% endfor %}
-        </tbody>
-    </table>
-    </div>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in info %}
+        
+        <tr>
+            {% for k, v in item.items %}
+                {% if task_filter and k == 'title' %}
+                    <td>
+                        <a href="{% url 'task_show' pk=item.id %}">{{ v }}</a>
+                    </td>
+                {% else %}
+                    <td>{{ v }}</td>
+                {% endif %}
+            {% endfor %}
+            
+            <td>
+                <a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a>
+                <a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock %}

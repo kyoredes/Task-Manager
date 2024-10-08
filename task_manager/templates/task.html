@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'View task' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    {% for item in info %}
+        <div class="card p-1">
+            <div class="card-body">
+                <h5 class="card-title mt-4 mb-4">{% trans 'Title' %}: {{ item.title }}</h5>
+
+                <div class="card-text text-start m-5">
+                    <p><strong>{% trans 'Author' %}:</strong> {{  item.author__username }}</p>
+                    <p><strong>{% trans 'Executor' %}:</strong> {{ item.executor__username }}</p>
+                    <p><strong>{% trans 'Status' %}:</strong> {{ item.status__title }}</p>
+                    <p><strong>{% trans 'Created At' %}:</strong> {{ item.created_at }}</p>
+                    <p><strong>{% trans 'Labels' %}:</strong> {{ item.label__name }}</p>
+                    <p><a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a></p>
+                    <p><a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

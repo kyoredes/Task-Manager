@@ -17,13 +17,13 @@ class StatusesListView(ListView):
     context_object_name = 'info'
     paginate_by = 20
     tables = [
-        translate('ID'),
+        'ID',
         translate('Name'),
         translate('Created at'),
         translate('Action'),
     ]
     extra_context = {
-        'title': 'Status',
+        'title': translate('Statuses'),
         'tables': tables,
         'url_name_change': 'update_status',
         'url_name_delete': 'delete_status',
@@ -46,7 +46,7 @@ class StatusCreateView(
 ):
     form_class = StatusCreateForm
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('statuses')
     success_message = translate("Status created successfully")
     extra_context = {
         'title': translate('Create status'),
@@ -59,15 +59,17 @@ class StatusUpdateView(
     SuccessMessageMixin,
     UpdateView,
 ):
-    model = Status
-    fields = ['title']
+    form_class = StatusCreateForm
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('statuses')
     success_message = translate("Status updated successfully")
     extra_context = {
         'title': translate('Update status'),
         'button': translate('Update'),
     }
+
+    def get_queryset(self):
+        return Status.objects.all()
 
 
 class StatusDeleteView(
@@ -76,7 +78,7 @@ class StatusDeleteView(
     DeleteView,
 ):
     model = Status
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('statuses')
     success_message = translate('Status deleted successfully')
     error_message = translate("This status is in use")
     template_name = 'forms.html'
@@ -95,5 +97,6 @@ class StatusDeleteView(
         context = super().get_context_data(**kwargs)
         context['value_to_delete'] = context['object']
         context['name'] = translate('status')
-        context['button'] = translate('delete')
+        context['button'] = translate('Yes, delete')
+        context['title'] = translate('Delete status')
         return context

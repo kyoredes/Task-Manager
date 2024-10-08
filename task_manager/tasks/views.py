@@ -17,7 +17,7 @@ class TaskListView(ListView):
     context_object_name = 'info'
     paginate_by = 20
     tables = [
-        translate('ID'),
+        'ID',
         translate('Name'),
         translate('Status'),
         translate('Author'),
@@ -28,7 +28,7 @@ class TaskListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Task'
+        context['title'] = translate('Tasks')
         context['tables'] = self.tables
         context['url_name_change'] = 'update_task'
         context['url_name_delete'] = 'delete_task'
@@ -61,10 +61,10 @@ class TaskCreateView(
 ):
     form_class = TaskCreateForm
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('tasks')
     success_message = translate('Task created successfully')
     extra_context = {
-        'title': 'Create task',
+        'title': translate('Create task'),
         'button': translate('Create'),
     }
 
@@ -78,15 +78,17 @@ class TaskUpdateView(
     CustomLoginRequiredMixin,
     UpdateView
 ):
-    model = Task
+    form_class = TaskCreateForm
     success_message = translate("Task successfully updated")
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('tasks')
     template_name = 'forms.html'
-    fields = ['title', 'description', 'status', 'executor']
     extra_context = {
         'title': translate('Update task'),
         'button': translate('Update'),
     }
+
+    def get_queryset(self):
+        return Task.objects.all()
 
 
 class TaskDeleteView(
@@ -97,7 +99,7 @@ class TaskDeleteView(
 ):
     model = Task
     success_message = translate('Task deleted successfully')
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('tasks')
     template_name = 'forms.html'
 
     def get_context_data(self, **kwargs):
@@ -117,3 +119,42 @@ class TaskDeleteView(
         text_error = translate("You are not allowed to delete this task")
         messages.error(self.request, text_error)
         return redirect(reverse_lazy('tasks'))
+
+
+class TaskShowView(ListView):
+    model = Task
+    template_name = 'task.html'
+    context_object_name = 'info'
+    paginate_by = 20
+    tables = [
+        'ID',
+        translate('Name'),
+        translate('Status'),
+        translate('Author'),
+        translate('Executor'),
+        translate('Created at'),
+        translate('Action'),
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Task view'
+        context['tables'] = self.tables
+        context['url_name_change'] = 'update_task'
+        context['url_name_delete'] = 'delete_task'
+        return context
+
+    def get_queryset(self):
+        task_id = self.model.objects.all().get(
+            id=self.kwargs.get('pk')
+        ).id
+        queryset = Task.objects.select_related('author', 'status', 'label').filter(id=task_id).values(
+            'id',
+            'title',
+            'status__title',
+            'author__username',
+            'executor__username',
+            'label__name',
+            'created_at',
+        )
+        return queryset

@@ -17,7 +17,7 @@
         {% csrf_token %}
 
         {% if value_to_delete %}
-            <h2>{% trans 'You are going to delete'%} {{ name }} {{ value_to_delete }}</h2>
+            <h2>{% trans 'Are you sure you want to delete'%} {{ name }} {{ value_to_delete }}?</h2>
         {% endif %}
         
         {% for field in form %}
@@ -32,7 +32,7 @@
         {% endfor %}
 
         
-        <div class="container wrapper flex-grow-1 d-flex mb-3 justify-content-center align-items-center">
+        <div class="container wrapper flex-grow-1 d-flex mb-3 mt-4 justify-content-center align-items-center">
             <input role="button" class="btn btn-primary mx-4" type="submit" value="{{ button }}">
         </div>
     </form>

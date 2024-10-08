@@ -16,13 +16,13 @@ class LabelListView(ListView):
     context_object_name = 'info'
     paginate_by = 20
     tables = [
-        translate('ID'),
+        'ID',
         translate('Name'),
         translate('Created at'),
         translate('Action'),
     ]
     extra_context = {
-        'title': 'Label',
+        'title': translate('Label'),
         'tables': tables,
         'url_name_change': 'update_label',
         'url_name_delete': 'delete_label',
@@ -45,7 +45,7 @@ class LabelCreateView(
 ):
     form_class = LabelCreateForm
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('labels')
     success_message = translate("Label created successfully")
     extra_context = {
         'title': translate('Create label'),
@@ -58,15 +58,17 @@ class LabelUpdateView(
     CustomLoginRequiredMixin,
     UpdateView,
 ):
-    model = Label
-    fields = ['name']
+    form_class = LabelCreateForm
     template_name = 'forms.html'
-    success_message = translate('Label successfullt changed')
+    success_message = translate('Label successfully changed')
     success_url = reverse_lazy('labels')
     extra_context = {
         'title': translate('Update label'),
         'button': translate('Update'),
     }
+
+    def get_queryset(self):
+        return Label.objects.all()
 
 
 class LabelDeleteView(
@@ -75,7 +77,7 @@ class LabelDeleteView(
     DeleteView,
 ):
     model = Label
-    success_message = translate('Label deletes successfully')
+    success_message = translate('Label deleted successfully')
     success_url = reverse_lazy('labels')
     template_name = 'forms.html'
     error_message = translate('This label is in use')
@@ -85,7 +87,7 @@ class LabelDeleteView(
         context['title'] = translate('Delete Label')
         context['value_to_delete'] = context['object']
         context['name'] = translate('label')
-        context['button'] = translate('delete')
+        context['button'] = translate('Yes, delete')
         return context
 
     def post(self, request, *args, **kwargs):

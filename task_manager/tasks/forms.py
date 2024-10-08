@@ -9,9 +9,18 @@ from task_manager.labels.models import Label
 class TaskCreateForm(forms.ModelForm):
     title = forms.CharField(label=translate("Name"))
     description = forms.CharField(label=translate("Description"))
-    status = forms.ModelChoiceField(queryset=Status.objects.all())
-    executor = forms.ModelChoiceField(queryset=get_user_model().objects.all())
-    label = forms.ModelChoiceField(queryset=Label.objects.all())
+    status = forms.ModelChoiceField(
+        label=translate('Status'),
+        queryset=Status.objects.all(),
+    )
+    executor = forms.ModelChoiceField(
+        label=translate('Executor'),
+        queryset=get_user_model().objects.all(),
+    )
+    label = forms.ModelChoiceField(
+        label=translate('Labels'),
+        queryset=Label.objects.all(),
+    )
 
     class Meta:
         model = Task

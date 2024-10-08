@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from task_manager.users.forms import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.utils.translation import gettext as translate
+from django.utils.translation import gettext
 from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -21,18 +21,17 @@ class UserListView(ListView):
     context_object_name = 'info'
     paginate_by = 20
     tables = [
-        translate('ID'),
-        translate('Useraname'),
-        translate('Full name'),
-        translate('Created at'),
+        'ID',
+        gettext('Username'),
+        gettext('Full name'),
+        gettext('Created at'),
+        gettext('Action'),
     ]
     extra_context = {
-        'title': 'Users',
+        'title': gettext('Users'),
         'tables': tables,
         'url_name_change': 'update_user',
         'url_name_delete': 'delete_user',
-        'button_value': translate('Create user'),
-        'button_url': reverse_lazy('create_user'),
     }
 
     def get_queryset(self):
@@ -46,64 +45,63 @@ class UserListView(ListView):
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = CreateUserForm
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
-    success_message = translate("User registered successfully")
+    success_url = reverse_lazy('login')
+    success_message = gettext("User registered successfully")
     extra_context = {
-        'title': translate('Create User'),
-        'button': translate('Create'),
+        'title': gettext('Create User'),
+        'button': gettext('Registrate'),
     }
 
 
 class UserUpdateView(
-    UserPassesTestMixin,
     CustomLoginRequiredMixin,
+    UserPassesTestMixin,
     SuccessMessageMixin,
     UpdateView
 ):
     model = User
     form_class = CreateUserForm
-    # fields = ['username', 'first_name', 'last_name', 'password']
     template_name = 'forms.html'
-    success_url = reverse_lazy('home')
-    success_message = translate("User successfully changed")
+    success_url = reverse_lazy('users')
+    success_message = gettext("User successfully changed")
     extra_context = {
-        'title': translate('Update user'),
-        'button': translate('Update'),
+        'title': gettext('Update user'),
+        'button': gettext('Update'),
     }
 
     def test_func(self, **kwargs):
         return self.request.user.id == self.kwargs.get('pk')
 
     def handle_no_permission(self):
-        text_error = translate("You are not allowed to edit this user")
+        text_error = gettext("You are not allowed to edit this user")
         messages.error(self.request, text_error)
         return redirect(reverse_lazy('users'))
 
 
 class UserDeleteView(
-    UserPassesTestMixin,
     CustomLoginRequiredMixin,
+    UserPassesTestMixin,
     SuccessMessageMixin,
     DeleteView
 ):
     model = User
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('users')
     template_name = 'forms.html'
-    success_message = translate("User successfully deleted")
+    success_message = gettext("User successfully deleted")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = translate('Delete user')
+        context['title'] = gettext('Delete user')
         context['value_to_delete'] = context['object']
-        context['name'] = translate('user')
-        context['button'] = translate('Delete')
+        context['name'] = gettext('user')
+        context['button'] = gettext('Yes, delete')
         return context
 
     def test_func(self, **kwargs):
         return self.request.user.id == self.kwargs.get('pk')
 
     def handle_no_permission(self):
-        text_error = translate("You are not allowed to delete this user")
+        text_error = gettext("You are not allowed to delete this user")
         messages.error(self.request, text_error)
         return redirect(reverse_lazy('users'))
 
@@ -111,13 +109,13 @@ class UserDeleteView(
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'forms.html'
-    success_message = translate("You are logged in")  # "Вы залогинены"
-    error_message = translate(
+    success_message = gettext("You are logged in")  # "Вы залогинены"
+    error_message = gettext(
         "Please check if your login or password is correct"
     )
     extra_context = {
-        'title': translate('Log In'),
-        'button': translate('Log In'),
+        'title': gettext('Log In'),
+        'button': gettext('Log in'),
     }
 
     def get_success_url(self):
@@ -131,6 +129,6 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 class CustomLogoutView(SuccessMessageMixin, LogoutView):
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        msg = translate("Successfully logged out")
+        msg = gettext("Successfully logged out")
         messages.add_message(request, messages.INFO, msg)
         return response

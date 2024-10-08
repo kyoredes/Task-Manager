@@ -33,7 +33,7 @@ ROLLBAR_TOKEN = os.getenv("ROLLBAR_TOKEN")
 DEBUG = True
 
 # LATER ADD 'webserver' HERE
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "webserver"]
 
 
 # Application definition

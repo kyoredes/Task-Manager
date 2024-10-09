@@ -148,7 +148,9 @@ class TaskShowView(ListView):
         task_id = self.model.objects.all().get(
             id=self.kwargs.get('pk')
         ).id
-        queryset = Task.objects.select_related('author', 'status', 'label').filter(id=task_id).values(
+        queryset = Task.objects.select_related(
+            'author', 'status', 'label'
+        ).filter(id=task_id).values(
             'id',
             'title',
             'status__title',

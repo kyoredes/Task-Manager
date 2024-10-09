@@ -39,7 +39,7 @@ class TestResponseCase(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_users_login_view(self):
-        response = self.client.get('/users/login/')
+        response = self.client.get('/login/')
         self.assertEqual(response.status_code, 200)
 
     def test_users_logout_view(self):

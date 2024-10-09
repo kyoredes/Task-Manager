@@ -2,7 +2,7 @@ from django.urls import path
 from task_manager.users import views
 
 urlpatterns = [
-    path('users/', views.UserListView.as_view(), name='users'),
+    path('', views.UserListView.as_view(), name='users'),
     path('create/', views.UserCreateView.as_view(), name='create_user'),
     path(
         '<int:pk>/update/',
@@ -14,6 +14,4 @@ urlpatterns = [
         views.UserDeleteView.as_view(),
         name='delete_user'
     ),
-    path('login/', views.UserLoginView.as_view(), name='login'),
-    path('logout/', views.CustomLogoutView.as_view(), name='logout'),
 ]

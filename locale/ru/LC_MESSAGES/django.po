@@ -215,7 +215,7 @@ msgid "Label successfully changed"
 msgstr "Метка успешно изменена"
 
 #: task_manager/labels/views.py:
-msgid: "Label deleted successfully"
+msgid "Label deleted successfully"
 msgstr "Метка успешно удалена"
 
 #: task_manager/labels/views.py:87

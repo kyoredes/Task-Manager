@@ -28,7 +28,7 @@ class TestResponseCase(TestCase):
         )
 
     def get_id(self, title):
-        user = Status.objects.all().get(title=title)
+        user = Status.objects.all().get(name=title)
         return user.id
 
     def test_login(self):
@@ -49,11 +49,11 @@ class TestResponseCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_statuses_update_view(self):
-        id = self.get_id(title='complete')
+        id = self.get_id(name='complete')
         response = self.client.get(f'/statuses/{id}/update/')
         self.assertEqual(response.status_code, 200)
 
     def test_statuses_delete_view(self):
-        id = self.get_id(title='complete')
+        id = self.get_id(name='complete')
         response = self.client.post(f'/statuses/{id}/delete/')
         self.assertEqual(response.status_code, 302)

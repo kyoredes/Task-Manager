@@ -31,31 +31,31 @@ class TestTaskResponseCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_tasks_update_view(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         user = get_user_model().objects.all().get(username='kaito')
         label = Label.objects.create(name='name')
         response = self.client.post(reverse('create_task'), {
-            'title': 'title',
+            'name': 'title',
             'description': 'sjhfkshk',
             'status': status.id,
             'executor': user.id,
             'label': label.id,
             })
-        id = Task.objects.all().get(title='title').id
+        id = Task.objects.all().get(name='title').id
         response = self.client.get(f'/tasks/{id}/update/')
         self.assertEqual(response.status_code, 200)
 
     def test_tasks_delete_view(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         user = get_user_model().objects.all().get(username='kaito')
         label = Label.objects.create(name='name')
         response = self.client.post(reverse('create_task'), {
-            'title': 'title',
+            'name': 'title',
             'description': 'sjhfkshk',
             'status': status.id,
             'executor': user.id,
             'label': label.id
             })
-        id = Task.objects.all().get(title='title').id
+        id = Task.objects.all().get(name='title').id
         response = self.client.post(f'/tasks/{id}/delete/')
         self.assertEqual(response.status_code, 302)

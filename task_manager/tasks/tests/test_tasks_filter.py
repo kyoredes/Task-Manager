@@ -22,13 +22,13 @@ class TestTaskCase(TestCase):
         )
 
     def test_filter(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         label = Label.objects.create(name='name')
         user = get_user_model().objects.all().get(username='kaito')
         self.client.post(
             reverse('create_task'),
             {
-                'title': 'title',
+                'name': 'title',
                 'description': 'sjhfkshk',
                 'status': status.id,
                 'executor': user.id

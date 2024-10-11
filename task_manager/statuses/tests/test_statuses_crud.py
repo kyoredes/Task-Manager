@@ -23,34 +23,34 @@ class TestStatusesCase(TestCase):
         )
 
     def get_id(self, title):
-        user = Status.objects.all().get(title=title)
+        user = Status.objects.all().get(name==title)
         return user.id
 
     def test_create_status(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_status'), {'name': 'name'}
         )
-        status_exists = Status.objects.filter(title='name').exists()
+        status_exists = Status.objects.filter(name='name').exists()
         self.assertTrue(status_exists)
 
     def test_update_status(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_status'), {'name': 'name'}
         )
         id = self.get_id('name')
         self.client.post(
-            reverse('update_status', kwargs={'pk': id}), {'title': 'new_name'}
+            reverse('update_status', kwargs={'pk': id}), {'name': 'new_name'}
         )
-        status_exists = Status.objects.all().filter(title='new_name').exists()
+        status_exists = Status.objects.all().filter(name='new_name').exists()
         self.assertTrue(status_exists)
 
     def test_delete_status(self):
         self.client.post(
-            reverse('create_status'), {'title': 'name'}
+            reverse('create_status'), {'name': 'name'}
         )
         id = self.get_id('name')
         self.client.post(
             reverse('delete_status', kwargs={'pk': id})
         )
-        status_exists = Status.objects.all().filter(title='name').exists()
+        status_exists = Status.objects.all().filter(name='name').exists()
         self.assertFalse(status_exists)

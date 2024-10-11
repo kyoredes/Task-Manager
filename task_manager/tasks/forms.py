@@ -7,7 +7,7 @@ from task_manager.labels.models import Label
 
 
 class TaskCreateForm(forms.ModelForm):
-    title = forms.CharField(label=translate("Name"))
+    name = forms.CharField(label=translate("Name"))
     description = forms.CharField(label=translate("Description"))
     status = forms.ModelChoiceField(
         label=translate('Status'),
@@ -24,4 +24,4 @@ class TaskCreateForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['title', 'description', 'status', 'executor', 'label']
+        fields = ['name', 'description', 'status', 'executor', 'label']

@@ -23,58 +23,58 @@ class TestTaskCase(TestCase):
         )
 
     def test_task_create(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         user = get_user_model().objects.all().get(username='kaito')
         label = Label.objects.create(name='name')
         self.client.post(
             reverse('create_task'),
             {
-                'title': 'title',
+                'name': 'title',
                 'description': 'sjhfkshk',
                 'status': status.id,
                 'executor': user.id,
                 'label': label.id
             }
         )
-        task = Task.objects.all().filter(title='title').exists()
+        task = Task.objects.all().filter(name='title').exists()
         self.assertTrue(task)
 
     def test_task_update(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         user = get_user_model().objects.all().get(username='kaito')
         label = Label.objects.create(name='name')
         self.client.post(
             '/tasks/create/',
             {
-                'title': 'title',
+                'name': 'title',
                 'description': 'sjhfkshk',
                 'status': status.id,
                 'executor': user.id,
                 'label': label.id
             }
         )
-        id = Task.objects.all().get(title='title').id
+        id = Task.objects.all().get(name='title').id
         self.client.post(
             f'/tasks/{id}/update/',
             {
-                'title': 'new_title',
+                'name': 'new_title',
                 'description': 'dsfsdf',
                 'status': status.id,
                 'executor': user.id,
                 'label': label.id
             }
         )
-        task = Task.objects.all().filter(title='new_title').exists()
+        task = Task.objects.all().filter(name='new_title').exists()
         self.assertTrue(task)
 
     def test_task_delete(self):
-        status = Status.objects.create(title='title')
+        status = Status.objects.create(name='title')
         user = get_user_model().objects.all().get(username='kaito')
         label = Label.objects.create(name='name')
         res = self.client.post(
             '/tasks/create/',
             {
-                'title': 'title',
+                'name': 'title',
                 'description': 'sjhfkshk',
                 'status': status.id,
                 'executor': user.id,
@@ -82,7 +82,7 @@ class TestTaskCase(TestCase):
             }
         )
         print(res)
-        id = Task.objects.all().get(title='title').id
+        id = Task.objects.all().get(name='title').id
         self.client.post(f'/tasks/{id}/delete/')
-        task = Task.objects.all().filter(title='title').exists()
+        task = Task.objects.all().filter(name='title').exists()
         self.assertFalse(task)

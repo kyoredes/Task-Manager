@@ -34,7 +34,7 @@ class StatusesListView(ListView):
     def get_queryset(self):
         return Status.objects.values(
             'id',
-            'title',
+            'name',
             'created_at',
         )
 

@@ -4,8 +4,8 @@ from django.utils.translation import gettext as translate
 
 
 class StatusCreateForm(forms.ModelForm):
-    title = forms.CharField(label=translate("Title"))
+    name = forms.CharField(label=translate("Name"))
 
     class Meta:
         model = Status
-        fields = ['title']
+        fields = ['name']

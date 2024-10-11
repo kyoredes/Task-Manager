@@ -40,8 +40,8 @@ class TaskListView(ListView):
     def get_queryset(self):
         queryset = Task.objects.select_related('author', 'status').values(
             'id',
-            'title',
-            'status__title',
+            'name',
+            'status__name',
             'author__username',
             'executor__username',
             'created_at',
@@ -152,8 +152,8 @@ class TaskShowView(ListView):
             'author', 'status', 'label'
         ).filter(id=task_id).values(
             'id',
-            'title',
-            'status__title',
+            'name',
+            'status__name',
             'author__username',
             'executor__username',
             'label__name',

@@ -16,7 +16,7 @@ class Task(models.Model):
     executor = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        related_name='customer',
+        related_name='executor',
     )
     label = models.ForeignKey(
         Label,

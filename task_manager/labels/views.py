@@ -28,6 +28,7 @@ class LabelListView(ListView):
         'url_name_delete': 'delete_label',
         'button_value': translate('Create label'),
         'button_url': reverse_lazy('create_label'),
+        'list_name': 'Labels',
     }
 
     def get_queryset(self):

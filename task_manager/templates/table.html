@@ -39,18 +39,21 @@
 
     <tbody>
         {% for item in info %}
-        
         <tr>
-            {% for k, v in item.items %}
-                {% if task_filter and k == 'title' %}
-                    <td>
-                        <a href="{% url 'task_show' pk=item.id %}">{{ v }}</a>
-                    </td>
-                {% else %}
-                    <td>{{ v }}</td>
-                {% endif %}
-            {% endfor %}
-            
+            <td>{{ item.id }}</td>
+            {% if list_name == 'Users' %}
+                <td>{{ item.username }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.date_joined }}</td>
+            {% elif list_name == 'Labels' or list_name == 'Statuses' %}
+                <td>{{ item.name }}</td>
+                <td>{{ item.created_at }}</td>
+            {% elif list_name == 'Tasks' %}
+                <td>{{ item.name }}</td>
+                <td>{{ item.status__name }}</td>
+                <td>{{ item.author__first_name }} {{ item.author__last_name }}</td>
+                <td>{{ item.executor__first_name }} {{ item.executor__last_name }}</td>
+            {% endif %}
             <td>
                 <a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a>
                 <a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a>

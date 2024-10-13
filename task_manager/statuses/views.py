@@ -29,6 +29,7 @@ class StatusesListView(ListView):
         'url_name_delete': 'delete_status',
         'button_value': translate('Create status'),
         'button_url': reverse_lazy('create_status'),
+        'list_name': 'Statuses',
     }
 
     def get_queryset(self):

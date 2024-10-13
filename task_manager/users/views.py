@@ -31,6 +31,7 @@ class UserListView(ListView):
         'tables': tables,
         'url_name_change': 'update_user',
         'url_name_delete': 'delete_user',
+        'list_name': 'Users',
     }
 
     def get_queryset(self):

@@ -35,6 +35,7 @@ class TaskListView(ListView):
         context['button_value'] = translate('Create task')
         context['button_url'] = reverse_lazy('create_task')
         context['task_filter'] = self.filterset
+        context['list_name'] = 'Tasks'
         return context
 
     def get_queryset(self):
@@ -42,8 +43,10 @@ class TaskListView(ListView):
             'id',
             'name',
             'status__name',
-            'author__username',
-            'executor__username',
+            'author__first_name',
+            'author__last_name',
+            'executor__first_name',
+            'executor__last_name',
             'created_at',
         )
         self.filterset = TaskFilter(

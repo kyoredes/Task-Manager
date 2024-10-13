@@ -33,7 +33,13 @@ ROLLBAR_TOKEN = os.getenv("ROLLBAR_TOKEN")
 DEBUG = True
 
 # LATER ADD 'webserver' HERE
-ALLOWED_HOSTS = ["localhost", "webserver", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "webserver",
+    "127.0.0.1",
+    '0.0.0.0',
+    '.railway.app',
+]
 
 
 # Application definition

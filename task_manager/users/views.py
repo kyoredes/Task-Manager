@@ -1,5 +1,4 @@
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
@@ -59,7 +58,7 @@ class UserUpdateView(
     SuccessMessageMixin,
     UpdateView
 ):
-    model = User
+    model = get_user_model()
     form_class = CreateUserForm
     template_name = 'forms.html'
     success_url = reverse_lazy('users')
@@ -84,7 +83,7 @@ class UserDeleteView(
     SuccessMessageMixin,
     DeleteView
 ):
-    model = User
+    model = get_user_model()
     success_url = reverse_lazy('users')
     template_name = 'forms.html'
     success_message = gettext("User successfully deleted")

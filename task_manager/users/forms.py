@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class CreateUserForm(UserCreationForm):
@@ -17,5 +17,5 @@ class CreateUserForm(UserCreationForm):
     )
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ['first_name', 'last_name', 'username']

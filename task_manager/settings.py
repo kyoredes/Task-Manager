@@ -32,6 +32,8 @@ ROLLBAR_TOKEN = os.getenv("ROLLBAR_TOKEN")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # LATER ADD 'webserver' HERE
 ALLOWED_HOSTS = [
     "localhost",

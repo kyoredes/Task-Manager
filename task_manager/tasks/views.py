@@ -156,6 +156,7 @@ class TaskShowView(ListView):
         ).filter(id=task_id).values(
             'id',
             'name',
+            'description',
             'status__name',
             'author__username',
             'executor__username',

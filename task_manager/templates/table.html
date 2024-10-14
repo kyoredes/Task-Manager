@@ -48,7 +48,11 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.created_at }}</td>
             {% elif list_name == 'Tasks' %}
-                <td>{{ item.name }}</td>
+                <td>
+                    <a href="{% url 'task_show' pk=item.id %}">
+                        {{ item.name }}
+                    </a>
+                </td>
                 <td>{{ item.status__name }}</td>
                 <td>{{ item.author__first_name }} {{ item.author__last_name }}</td>
                 <td>{{ item.executor__first_name }} {{ item.executor__last_name }}</td>

@@ -15,8 +15,8 @@
 
                 <div class="card-text text-start m-5">
                     <p><strong>{% trans 'Description' %}:</strong> {{ item.description }}</p>
-                    <p><strong>{% trans 'Author' %}:</strong> {{  item.author__username }}</p>
-                    <p><strong>{% trans 'Executor' %}:</strong> {{ item.executor__username }}</p>
+                    <p><strong>{% trans 'Author' %}:</strong> {{  item.author__first_name }} {{ item.author__last_name }}</p>
+                    <p><strong>{% trans 'Executor' %}:</strong> {{ item.executor__first_name }} {{ item.author__last_name }}</p>
                     <p><strong>{% trans 'Status' %}:</strong> {{ item.status__name }}</p>
                     <p><strong>{% trans 'Created At' %}:</strong> {{ item.created_at }}</p>
                     <p><strong>{% trans 'Labels' %}:</strong> {{ item.label__name }}</p>

@@ -158,8 +158,10 @@ class TaskShowView(ListView):
             'name',
             'description',
             'status__name',
-            'author__username',
-            'executor__username',
+            'author__first_name',
+            'author__last_name',
+            'executor__first_name',
+            'executor__last_name',
             'label__name',
             'created_at',
         )

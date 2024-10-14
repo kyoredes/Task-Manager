@@ -24,6 +24,7 @@ class TaskCreateForm(forms.ModelForm):
         label=translate('Labels'),
         queryset=Label.objects.all(),
         widget=forms.SelectMultiple,
+        required=False,
     )
 
     class Meta:

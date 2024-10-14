@@ -12,7 +12,6 @@
 
 
 {% block content %}
-{{ info }}
 <div class="container wrapper flex-grow-1">
     {% if button_value %}
     <div class="container wrapper flex-grow-1 d-flex mb-3 justify-content-start align-items-center">
@@ -53,6 +52,7 @@
                 <td>{{ item.status__name }}</td>
                 <td>{{ item.author__first_name }} {{ item.author__last_name }}</td>
                 <td>{{ item.executor__first_name }} {{ item.executor__last_name }}</td>
+                <td>{{ item.created_at }}</td>
             {% endif %}
             <td>
                 <a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a>

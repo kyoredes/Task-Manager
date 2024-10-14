@@ -8,7 +8,10 @@ from task_manager.labels.models import Label
 
 class TaskCreateForm(forms.ModelForm):
     name = forms.CharField(label=translate("Name"))
-    description = forms.CharField(label=translate("Description"))
+    description = forms.CharField(
+        label=translate("Description"),
+        widget=forms.Textarea(),
+    )
     status = forms.ModelChoiceField(
         label=translate('Status'),
         queryset=Status.objects.all(),

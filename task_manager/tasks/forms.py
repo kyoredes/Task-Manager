@@ -20,9 +20,10 @@ class TaskCreateForm(forms.ModelForm):
         label=translate('Executor'),
         queryset=get_user_model().objects.all(),
     )
-    label = forms.ModelChoiceField(
+    label = forms.ModelMultipleChoiceField(
         label=translate('Labels'),
         queryset=Label.objects.all(),
+        widget=forms.SelectMultiple,
     )
 
     class Meta:

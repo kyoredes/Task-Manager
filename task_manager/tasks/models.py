@@ -18,9 +18,8 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name='executor',
     )
-    label = models.ForeignKey(
+    label = models.ManyToManyField(
         Label,
-        on_delete=models.PROTECT,
         related_name='label',
     )
     created_at = models.DateTimeField(auto_now_add=True)

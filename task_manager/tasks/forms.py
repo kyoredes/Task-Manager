@@ -19,8 +19,9 @@ class TaskCreateForm(forms.ModelForm):
     executor = forms.ModelChoiceField(
         label=translate('Executor'),
         queryset=get_user_model().objects.all(),
+        required=False,
     )
-    label = forms.ModelMultipleChoiceField(
+    labels = forms.ModelMultipleChoiceField(
         label=translate('Labels'),
         queryset=Label.objects.all(),
         widget=forms.SelectMultiple,

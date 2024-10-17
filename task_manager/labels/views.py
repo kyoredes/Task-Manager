@@ -5,8 +5,6 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from task_manager.labels.forms import LabelCreateForm
 from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models.deletion import ProtectedError
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 

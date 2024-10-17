@@ -23,7 +23,7 @@ class TestStatusesCase(TestCase):
         )
 
     def get_id(self, title):
-        user = Status.objects.all().get(name==title)
+        user = Status.objects.all().get(name=title)
         return user.id
 
     def test_create_status(self):

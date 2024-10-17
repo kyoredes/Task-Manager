@@ -6,6 +6,7 @@ from task_manager.labels.forms import LabelCreateForm
 from task_manager.utils.utils_classes import CustomLoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.deletion import ProtectedError
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -93,15 +94,7 @@ class LabelDeleteView(
 
     def post(self, request, *args, **kwargs):
         label = self.get_object()
-
-        try:
-            label.delete()
-            messages.success(request, self.success_message)
-        except ProtectedError:
+        if label.tasks.exists():
             messages.error(request, self.error_message)
-        return redirect(self.success_url)
-
-    def handle_no_permission(self):
-        text_error = translate('This label is in use')
-        messages.error(self.request, text_error)
-        return redirect(reverse_lazy('labels'))
+            return redirect(self.success_url)
+        return super().post(request, *args, **kwargs)

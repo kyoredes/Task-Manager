@@ -297,3 +297,7 @@ msgstr "Задачу может удалить только ее автор"
 #: task_manager/tasks/views.py:112
 msgid "task"
 msgstr "задание"
+
+#: task_manager/tasks/views.py:105
+msgid "Task can only be deleted by its author"
+msgstr "Задачу может удалить только ее автор"

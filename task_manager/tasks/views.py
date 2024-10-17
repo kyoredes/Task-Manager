@@ -103,6 +103,7 @@ class TaskDeleteView(
     model = Task
     success_message = translate('Task deleted successfully')
     success_url = reverse_lazy('tasks')
+    error_url = translate("Task can only be deleted by its author")
     template_name = 'forms.html'
 
     def get_context_data(self, **kwargs):

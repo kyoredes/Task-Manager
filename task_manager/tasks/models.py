@@ -17,6 +17,8 @@ class Task(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
         related_name='executor',
+        null=True,
+        blank=True,
     )
     label = models.ManyToManyField(
         Label,

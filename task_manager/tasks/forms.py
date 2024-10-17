@@ -11,6 +11,7 @@ class TaskCreateForm(forms.ModelForm):
     description = forms.CharField(
         label=translate("Description"),
         widget=forms.Textarea(),
+        required=False,
     )
     status = forms.ModelChoiceField(
         label=translate('Status'),
@@ -19,11 +20,13 @@ class TaskCreateForm(forms.ModelForm):
     executor = forms.ModelChoiceField(
         label=translate('Executor'),
         queryset=get_user_model().objects.all(),
+        required=False,
     )
     label = forms.ModelMultipleChoiceField(
         label=translate('Labels'),
         queryset=Label.objects.all(),
         widget=forms.SelectMultiple,
+        required=False,
     )
 
     class Meta:

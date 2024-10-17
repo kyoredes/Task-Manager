@@ -152,7 +152,7 @@ msgstr "Удаление пользователя"
 msgid "user"
 msgstr "пользователя"
 
-#: task_manager/users/views.py:97 task_manager/statuses/views.py:100
+#: task_manager/users/views.py:97 task_manager/statuses/views.py:100 task_manager/tasks/views.py:113
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
@@ -222,6 +222,10 @@ msgstr "Метка успешно удалена"
 msgid "Delete Label"
 msgstr "Удаление метки"
 
+#: task_manager/tasks/views.py:110
+msgid "Delete task"
+msgstr "Удаление задания"
+
 #: task_manager/labels/views.py:35 task_manager/tasks/views.py:67
 msgid "Create task"
 msgstr "Создать задачу"
@@ -289,3 +293,7 @@ msgstr "Задача успешно удалена"
 #: task_manager/tasks/views.py:119
 msgid "You are not allowed to delete this task"
 msgstr "Задачу может удалить только ее автор"
+
+#: task_manager/tasks/views.py:112
+msgid "task"
+msgstr "задание"

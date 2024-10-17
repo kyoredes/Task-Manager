@@ -28,5 +28,4 @@ test-tasks:
 test-labels:
 	poetry run python manage.py test task_manager/labels/tests
 locale:
-	poetry run django-admin makemessages -a --ignore=venv/* --extension=html,py
 	poetry run django-admin compilemessages

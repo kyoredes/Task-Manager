@@ -26,5 +26,5 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def str(self):
+    def __str__(self):
         return self.name

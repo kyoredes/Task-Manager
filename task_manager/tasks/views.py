@@ -110,7 +110,7 @@ class TaskDeleteView(
         context['title'] = translate('Delete task')
         context['value_to_delete'] = context['object']
         context['name'] = translate('task')
-        context['button'] = translate('delete')
+        context['button'] = translate('Yes, delete')
         return context
 
     def test_func(self, **kwargs):

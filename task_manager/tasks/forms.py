@@ -22,7 +22,7 @@ class TaskCreateForm(forms.ModelForm):
         queryset=get_user_model().objects.all(),
         required=False,
     )
-    label = forms.ModelMultipleChoiceField(
+    labels = forms.ModelMultipleChoiceField(
         label=translate('Labels'),
         queryset=Label.objects.all(),
         widget=forms.SelectMultiple,
@@ -31,4 +31,4 @@ class TaskCreateForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'status', 'executor', 'label']
+        fields = ['name', 'description', 'status', 'executor', 'labels']

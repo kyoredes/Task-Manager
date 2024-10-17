@@ -20,7 +20,7 @@ class Task(models.Model):
         null=True,
         blank=True,
     )
-    label = models.ManyToManyField(
+    labels = models.ManyToManyField(
         Label,
         related_name='tasks',
     )

@@ -19,7 +19,7 @@
                     <p><strong>{% trans 'Status' %}:</strong> {{ info.status }}</p>
                     <p><strong>{% trans 'Created At' %}:</strong> {{ info.created_at }}</p>
                     <p><strong>{% trans 'Label' %}:</strong> 
-                        {% for label in info.label.all %}
+                        {% for label in info.labels.all %}
                             {{ label }}{% if not forloop.last %}, {% endif %}
                         {% empty %}
                             {% trans 'No labels' %}

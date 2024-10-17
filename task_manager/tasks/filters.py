@@ -21,14 +21,14 @@ class TaskFilter(filter.FilterSet):
         queryset=get_user_model().objects.all(),
         label=translate('Executor'),
     )
-    label = filter.ModelChoiceFilter(
+    labels = filter.ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=translate('Label')
     )
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'label']
+        fields = ['status', 'executor', 'labels']
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.get('request', None)

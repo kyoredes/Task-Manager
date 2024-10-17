@@ -40,7 +40,7 @@ class TestTaskResponseCase(TestCase):
             'status': status.id,
             'executor': user.id,
             'label': label.id,
-            })
+        })
         id = Task.objects.all().get(name='title').id
         response = self.client.get(f'/tasks/{id}/update/')
         self.assertEqual(response.status_code, 200)
@@ -55,7 +55,7 @@ class TestTaskResponseCase(TestCase):
             'status': status.id,
             'executor': user.id,
             'label': label.id
-            })
+        })
         id = Task.objects.all().get(name='title').id
         response = self.client.post(f'/tasks/{id}/delete/')
         self.assertEqual(response.status_code, 302)

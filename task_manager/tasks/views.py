@@ -124,45 +124,7 @@ class TaskDeleteView(
         return redirect(reverse_lazy('tasks'))
 
 
-class TaskShowView(ListView):
+class TaskDetailView(DeleteView):
     model = Task
     template_name = 'task.html'
     context_object_name = 'info'
-    paginate_by = 20
-    tables = [
-        'ID',
-        translate('Name'),
-        translate('Status'),
-        translate('Author'),
-        translate('Executor'),
-        translate('Created at'),
-        translate('Action'),
-    ]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Task view'
-        context['tables'] = self.tables
-        context['url_name_change'] = 'update_task'
-        context['url_name_delete'] = 'delete_task'
-        return context
-
-    def get_queryset(self):
-        task_id = self.model.objects.all().get(
-            id=self.kwargs.get('pk')
-        ).id
-        queryset = Task.objects.select_related(
-            'author', 'status', 'label'
-        ).filter(id=task_id).values(
-            'id',
-            'name',
-            'description',
-            'status__name',
-            'author__first_name',
-            'author__last_name',
-            'executor__first_name',
-            'executor__last_name',
-            'label__name',
-            'created_at',
-        )
-        return queryset

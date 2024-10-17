@@ -20,10 +20,9 @@ class Task(models.Model):
     )
     label = models.ManyToManyField(
         Label,
-        related_name='label',
-        blank=True,
+        related_name='tasks',
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def str(self):
         return self.name

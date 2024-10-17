@@ -8,24 +8,26 @@
 {% block content %}
 
 <div class="container mt-5">
-    {% for item in info %}
         <div class="card p-1">
             <div class="card-body">
-                <h5 class="card-title mt-4 mb-4">{{ item.name }}</h5>
-
+                
+                <h5 class="card-title mt-4 mb-4">{{ info.name }}</h5>
                 <div class="card-text text-start m-5">
-                    <p><strong>{% trans 'Description' %}:</strong> {{ item.description }}</p>
-                    <p><strong>{% trans 'Author' %}:</strong> {{  item.author__first_name }} {{ item.author__last_name }}</p>
-                    <p><strong>{% trans 'Executor' %}:</strong> {{ item.executor__first_name }} {{ item.executor__last_name }}</p>
-                    <p><strong>{% trans 'Status' %}:</strong> {{ item.status__name }}</p>
-                    <p><strong>{% trans 'Created At' %}:</strong> {{ item.created_at }}</p>
-                    <p><strong>{% trans 'Labels' %}:</strong> {{ item.label__name }}</p>
-                    <p><a href="{% url url_name_change pk=item.id %}">{% trans 'Change' %}</a></p>
-                    <p><a href="{% url url_name_delete pk=item.id %}">{% trans 'Delete' %}</a></p>
+                    <p><strong>{% trans 'Description' %}:</strong> {{ info.description }}</p>
+                    <p><strong>{% trans 'Author' %}:</strong> {{  info.author }}</p>
+                    <p><strong>{% trans 'Executor' %}:</strong> {{ info.executor }}</p>
+                    <p><strong>{% trans 'Status' %}:</strong> {{ info.status }}</p>
+                    <p><strong>{% trans 'Created At' %}:</strong> {{ info.created_at }}</p>
+                    <p><strong>{% trans 'Label' %}:</strong> 
+                        {% for label in info.label.all %}
+                            {{ label }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            {% trans 'No labels' %}
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
         </div>
-    {% endfor %}
 </div>
 
 {% endblock %}

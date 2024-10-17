@@ -15,7 +15,7 @@ urlpatterns = [
     ),
     path(
         '<int:pk>/',
-        views.TaskShowView.as_view(),
+        views.TaskDetailView.as_view(),
         name='task_show'
     )
 ]

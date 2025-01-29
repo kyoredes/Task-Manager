@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as translate
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.utils.utils_classes import CustomLoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from task_manager.tasks.forms import TaskCreateForm
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -125,7 +125,7 @@ class TaskDeleteView(
         return redirect(reverse_lazy('tasks'))
 
 
-class TaskDetailView(DeleteView):
+class TaskDetailView(DetailView):
     model = Task
     template_name = 'task.html'
     context_object_name = 'info'
